@@ -28,7 +28,7 @@ export class BoardComponent {
       FINISH_NODE_COL
     );
 
-    this.grid = this._dijkstraService.getInitialGrid(BOARD_HEIGHT, BOARD_WIDTH);
+    this.grid = this._dijkstraService.getInitialGrid(BOARD_WIDTH, BOARD_HEIGHT);
     this.mouseIsPressed = false;
   }
 }

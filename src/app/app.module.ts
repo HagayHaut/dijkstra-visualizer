@@ -3,18 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
-import { CellComponent } from './cell/cell.component';
+import { NodeComponent } from './node/node.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    BoardComponent,
-    CellComponent
-  ],
-  imports: [
-    BrowserModule
-  ],
+  declarations: [AppComponent, BoardComponent, NodeComponent],
+  imports: [BrowserModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,1 +1,14 @@
 <h1>Dijkstra's Shortest Path Algorithm Visualizer</h1>
+<p>Press on the board to add obstacles</p>
+<button>Visualize Dijkstra's</button>
+<div class="grid">
+    <div
+        *ngFor="let row of grid; let r = index"
+    >
+        <node
+            *ngFor="let node of row; let c = index"
+        >
+
+        </node>
+    </div>
+</div>

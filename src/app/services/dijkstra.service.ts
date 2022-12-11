@@ -35,12 +35,12 @@ export class DijkstraService {
     };
   }
 
-  getInitialGrid(rows: number, cols: number): GraphNode[][] {
+  getInitialGrid(width: number, height: number): GraphNode[][] {
     const grid: GraphNode[][] = [];
 
-    for (let r = 0; r < rows; r++) {
+    for (let r = 0; r < height; r++) {
       grid.push(
-        Array(cols)
+        Array(width)
           .fill({})
           .map((_, c) => this.createNode(r, c))
       );
