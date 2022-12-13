@@ -1,3 +1,5 @@
-<div class="node">
-    
+<div 
+    [ngClass]="getClassName([isStart, isFinish, isWall])"
+    (click)="onNodeClick.emit({ coordinates })"
+>
 </div>

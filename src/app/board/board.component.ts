@@ -2,13 +2,13 @@ import { Component } from '@angular/core';
 import { GraphNode } from '../core/models';
 import { DijkstraService } from '../services/dijkstra.service';
 
-const BOARD_WIDTH = 50;
-const BOARD_HEIGHT = 30;
+const BOARD_WIDTH = 30;
+const BOARD_HEIGHT = 50;
 
-const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
-const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
+const START_ROW = 12;
+const START_COL = 15;
+const FINISH_ROW = 38;
+const FINISH_COL = 15;
 
 @Component({
   selector: 'board',
@@ -18,17 +18,23 @@ const FINISH_NODE_COL = 35;
 export class BoardComponent {
   grid: GraphNode[][];
   _dijkstraService: DijkstraService;
-  mouseIsPressed: boolean;
 
   constructor() {
     this._dijkstraService = new DijkstraService(
-      START_NODE_ROW,
-      START_NODE_COL,
-      FINISH_NODE_ROW,
-      FINISH_NODE_COL
+      START_ROW,
+      START_COL,
+      FINISH_ROW,
+      FINISH_COL
     );
 
     this.grid = this._dijkstraService.getInitialGrid(BOARD_WIDTH, BOARD_HEIGHT);
-    this.mouseIsPressed = false;
+  }
+
+  handleNodeClick(eventData: { coordinates: number[] }) {
+    const [r, c] = eventData.coordinates;
+    const node = this.grid[r][c];
+    if (!node.isStart && !node.isFinish) {
+      this.grid = this._dijkstraService.getGridWithNewWall(this.grid, r, c);
+    }
   }
 }

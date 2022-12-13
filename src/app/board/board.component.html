@@ -7,6 +7,11 @@
     >
         <node
             *ngFor="let node of row; let c = index"
+            [coordinates]="[r, c]"
+            [isStart]="node.isStart"
+            [isFinish]="node.isFinish"
+            [isWall]="node.isWall"
+            (onNodeClick)="handleNodeClick($event)"
         >
 
         </node>

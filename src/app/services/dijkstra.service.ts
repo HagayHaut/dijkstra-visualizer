@@ -5,10 +5,10 @@ Injectable({
   providedIn: 'root',
 });
 export class DijkstraService {
-  private START_NODE_ROW: number;
-  private START_NODE_COL: number;
-  private FINISH_NODE_ROW: number;
-  private FINISH_NODE_COL: number;
+  private START_ROW: number;
+  private START_COL: number;
+  private FINISH_ROW: number;
+  private FINISH_COL: number;
 
   constructor(
     start_row: number,
@@ -16,21 +16,25 @@ export class DijkstraService {
     finish_row: number,
     finish_col: number
   ) {
-    this.START_NODE_ROW = start_row;
-    this.START_NODE_COL = start_col;
-    this.FINISH_NODE_ROW = finish_row;
-    this.FINISH_NODE_COL = finish_col;
+    this.START_ROW = start_row;
+    this.START_COL = start_col;
+    this.FINISH_ROW = finish_row;
+    this.FINISH_COL = finish_col;
   }
 
   createNode(row: number, col: number): GraphNode {
+    const isStart = row === this.START_ROW && col === this.START_COL;
+    const isFinish = row === this.FINISH_ROW && col === this.FINISH_COL;
+    const isWall = !!~~Math.random() && !isStart && !isFinish;
+
     return {
       row,
       col,
-      isStart: row === this.START_NODE_ROW && col === this.START_NODE_COL,
-      isFinish: row === this.FINISH_NODE_ROW && col === this.FINISH_NODE_COL,
+      isStart,
+      isFinish,
       distance: Infinity,
       isVisited: false,
-      isWall: false,
+      isWall,
       previousNode: null,
     };
   }
@@ -47,5 +51,20 @@ export class DijkstraService {
     }
 
     return grid;
+  }
+
+  getGridWithNewWall(
+    grid: GraphNode[][],
+    row: number,
+    col: number
+  ): GraphNode[][] {
+    const updatedGrid = [...grid];
+    const node = grid[row][col];
+    const updatedNode = {
+      ...node,
+      isWall: !node.isWall,
+    };
+    updatedGrid[row][col] = updatedNode;
+    return updatedGrid;
   }
 }
