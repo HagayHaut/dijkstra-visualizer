@@ -25,7 +25,6 @@ export class DijkstraService {
   createNode(row: number, col: number): GraphNode {
     const isStart = row === this.START_ROW && col === this.START_COL;
     const isFinish = row === this.FINISH_ROW && col === this.FINISH_COL;
-    const isWall = !!~~Math.random() && !isStart && !isFinish;
 
     return {
       row,
@@ -34,7 +33,7 @@ export class DijkstraService {
       isFinish,
       distance: Infinity,
       isVisited: false,
-      isWall,
+      isWall: false,
       previousNode: null,
     };
   }
